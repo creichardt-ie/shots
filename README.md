@@ -8,6 +8,9 @@ vessels by their weight.
 Native Kotlin and Jetpack Compose. The machine is controlled over Bluetooth
 when it is in range, with the La Marzocco cloud as a fallback.
 
+**[User guide](https://creichardt-ie.github.io/shots/)** ·
+**[Download the APK](../../releases/latest)**
+
 ## Features
 
 - **Brew by weight.** Set a target yield; the app stops the machine just
@@ -25,8 +28,9 @@ when it is in range, with the La Marzocco cloud as a fallback.
   readings.
 - **Backups** of the history into `Documents/CoffeeApp/`, which survive an
   uninstall, and restore from them.
-- **Offline help.** The user guide ([`docs/APP_GUIDE.html`](docs/APP_GUIDE.html))
-  is built into the app; the **?** opens it at the screen you are on.
+- **Offline help.** The [user guide](https://creichardt-ie.github.io/shots/)
+  is built into the app; the **?** opens it at the screen you are on. Its
+  source is [`docs/APP_GUIDE.html`](docs/APP_GUIDE.html).
 
 ## Supported hardware
 
