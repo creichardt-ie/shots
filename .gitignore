@@ -1,0 +1,32 @@
+# --- Build output ---
+android/.gradle/
+android/.kotlin/
+android/build/
+android/app/build/
+android/app/release/
+android/app/debug/
+android/captures/
+*.apk
+*.aab
+*.ap_
+
+# --- Local machine config (SDK path, IDE state) ---
+android/local.properties
+android/.idea/
+*.iml
+.vscode/
+
+# --- Signing keys: never commit ---
+*.jks
+*.keystore
+keystore.properties
+
+# --- Local working notes and tooling ---
+CLAUDE.md
+.claude/
+*.log
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+desktop.ini

@@ -1,0 +1,6 @@
+<resources>
+    <!-- Black: the icon is the whole splash composition now, which brings
+         its own cream tile and sits on black. An earlier scale-only
+         foreground used a cream background, #F2EBDD. -->
+    <color name="ic_launcher_background">#000000</color>
+</resources>

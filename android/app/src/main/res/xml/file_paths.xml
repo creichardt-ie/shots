@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- Log files live in filesDir/logs. Shared read-only, one URI at a time,
+         via FileProvider so no storage permission is involved. -->
+    <files-path name="logs" path="logs/" />
+    <!-- Since 2.16.1 the logs live in Android/data/<package>/files/logs, so a
+         release build's log can be read over adb; the private path above stays
+         for the fallback when shared storage is unavailable. -->
+    <external-files-path name="logs_ext" path="logs/" />
+</paths>
