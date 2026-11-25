@@ -21,7 +21,9 @@ gradlew assembleDebug   # debuggable build, for run-as access to the app's files
 Without Android Studio, set `ANDROID_HOME` to the SDK, and `JAVA_HOME` to a
 JDK 21 (Android Studio's bundled `jbr` will do).
 
-Both builds are signed with **your PC's debug key**
+With `~/.android/shots-release.properties` present (the maintainer's
+release key, never in the repo) `assembleRelease` signs with that key; see
+`app/build.gradle.kts`. Otherwise both builds are signed with **your PC's debug key**
 (`~/.android/debug.keystore`, created by the Android tooling), so either
 installs over the other with `adb install -r` and keeps every byte of data.
 Keep using the same PC (or copy that keystore): a build signed with a

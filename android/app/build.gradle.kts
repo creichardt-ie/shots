@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: MIT
 // Assisted by AI (Claude).
 
+import java.util.Properties
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -44,18 +45,38 @@ android {
         // 2.15.0: machine picture choice (La Marzocco photo, own photo, none).
         // 2.16.0: Bookoo scale support; one GATT client, a protocol per brand.
         // 2.16.1: logs written to Android/data (readable over adb on release).
-        versionCode = 34
-        versionName = "2.17.1"
+        // 2.17.2: first public release - no seeded scale MAC or machine serial;
+        //         a new-style Acaia falls back to the Umbra's characteristics.
+        versionCode = 35
+        versionName = "2.17.2"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    // The published APKs are signed with a release key kept outside the repo,
+    // described by ~/.android/shots-release.properties (storeFile relative to
+    // that folder, storePassword, keyAlias, keyPassword). Without that file -
+    // anyone else's checkout - release builds use the local debug key.
+    // Android only updates an app in place with the key that signed it.
+    val releaseKeyProps = File(System.getProperty("user.home"), ".android/shots-release.properties")
+    val releaseKey = if (releaseKeyProps.isFile) {
+        Properties().apply { releaseKeyProps.inputStream().use { load(it) } }
+    } else {
+        null
+    }
+    signingConfigs {
+        if (releaseKey != null) {
+            create("release") {
+                storeFile = File(releaseKeyProps.parentFile, releaseKey.getProperty("storeFile"))
+                storePassword = releaseKey.getProperty("storePassword")
+                keyAlias = releaseKey.getProperty("keyAlias")
+                keyPassword = releaseKey.getProperty("keyPassword")
+            }
+        }
     }
 
     buildTypes {
         release {
-            // Signed with this PC's debug key on purpose: the installed app
-            // carries that signature, and Android only updates in place with
-            // the same key. A new key means uninstalling, which loses the
-            // settings, learned offset, login and BLE token (keystore-bound).
-            signingConfig = signingConfigs.getByName("debug")
+            signingConfig = signingConfigs.getByName(if (releaseKey != null) "release" else "debug")
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }

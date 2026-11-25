@@ -43,6 +43,11 @@ the app is built around the Micra.
 
 Android 8.0 (API 26) or newer, with Bluetooth LE.
 
+## Install
+
+Download the APK from [Releases](../../releases) and open it on the phone
+(allow installing from that source when Android asks).
+
 ## Building
 
 Requires the Android SDK and JDK 21 (Android Studio ships both). Open the
@@ -57,13 +62,17 @@ gradlew assembleRelease  # app/build/outputs/apk/release/
 From a plain shell, set `ANDROID_HOME` to the SDK and `JAVA_HOME` to a
 JDK 21 (Android Studio's `jbr` folder will do).
 
-**Signing.** The release build is signed with your own PC's Android debug key
-(`~/.android/debug.keystore`); there is no release keystore in this
-repository, and none should ever be committed. Build updates on the same PC
-(or keep a copy of that keystore): Android refuses to update an app signed
-with a different key, and uninstalling to get round it deletes the app's
-settings, login and Bluetooth token. Shot history can be restored from the
-automatic backup.
+**Signing.** A build of your own is signed with your PC's Android debug key
+(`~/.android/debug.keystore`); no keystore is in this repository, and none
+should ever be committed. Build updates on the same PC (or keep a copy of
+that keystore): Android refuses to update an app signed with a different key,
+and uninstalling to get round it deletes the app's settings, login and
+Bluetooth token. Shot history can be restored from the automatic backup.
+
+So an APK from the [Releases](../../releases) page and one you built
+yourself cannot update each other. The published APKs are signed with the
+project's release key, certificate SHA-256
+`E0:F2:C1:4F:0A:3F:CC:27:A6:5E:0A:5E:D2:19:CB:17:57:03:9E:79:BB:A9:A0:34:E5:E5:D9:55:4D:DD:70:54`.
 
 The module map, the design decisions and the test suites are described in
 [`android/README.md`](android/README.md).
